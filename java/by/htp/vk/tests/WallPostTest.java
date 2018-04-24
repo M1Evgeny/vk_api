@@ -20,30 +20,30 @@ public class WallPostTest {
 	}
 
 	@Test
-	public void A_createWallPostTest() {
+	public void createWallPostTest() {
 		steps.loginToVk();
 		steps.goToMyPage();
 		wallPostCountBefore = steps.getWallPostCount();
 		Assert.assertTrue(steps.wallPost(), "Wall post wasnt created");
 	}
 
-	@Test
-	public void B_likeWallPostTest() {
+	@Test (dependsOnMethods = { "createWallPostTest" })
+	public void likeWallPostTest() {
 		Assert.assertTrue(steps.clickLikePost(), "Post wasnt liked");
 	}
 
-	@Test
-	public void C_editWallPostTest() {
+	@Test (dependsOnMethods = { "likeWallPostTest" })
+	public void editWallPostTest() {
 		Assert.assertTrue(steps.edidWallPost(), "Post wasnt edited");
 	}
 
-	@Test
-	public void D_addCommentWallPostTest() {
+	@Test (dependsOnMethods = { "createWallPostTest" })
+	public void addCommentWallPostTest() {
 		Assert.assertTrue(steps.addComment(), "Comment wasnt created");
 	}
 
-	@Test
-	public void E_deleteWallPostTest() {
+	@Test (dependsOnMethods = { "createWallPostTest" })
+	public void deleteWallPostTest() {
 		steps.deleteWallPost();
 		wallPostCountAfer = steps.getWallPostCount();
 		Assert.assertEquals(wallPostCountBefore, wallPostCountAfer);

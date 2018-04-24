@@ -21,6 +21,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class VkApi {
+
+	private String post_count;
+	private String post_id;
+	private String message_count;
+	private String message_id;
+
 	private String valueUserId = getProperty("vk.userId");
 	private String hostName = getProperty("vk.hostName");
 	private String valueToken = getProperty("vk.token");
@@ -31,8 +37,8 @@ public class VkApi {
 	private String methodEditPost = "/method/wall.edit";
 	private String methodAddCommentPost = "/method/wall.createComment";
 	private String methodDeletePost = "/method/wall.delete";
-	private String methodSendMessege = "/method/messages.send";
-	private String methodDeleteMessege = "/method/messages.delete";
+	private String methodSendMessage = "/method/messages.send";
+	private String methodDeleteMessage = "/method/messages.delete";
 
 	private String paramOwnerID = "owner_id";
 	private String paramMessage = "message";
@@ -42,10 +48,6 @@ public class VkApi {
 	private String paramPeerId = "peer_id";
 	private String paramMessageIds = "message_ids";
 
-	private String post_count;
-	private String post_id;
-	private String message_count;
-	private String messege_id;
 	private String paramPost_id = "post_id";
 	private String scheme = "https";
 	private String response = "response";
@@ -75,8 +77,8 @@ public class VkApi {
 		return message_count;
 	}
 
-	public String getMessege_id() {
-		return messege_id;
+	public String getMessage_id() {
+		return message_id;
 	}
 
 	public void getWallPostCount() {
@@ -116,11 +118,10 @@ public class VkApi {
 		createPostUrl.setPath(methodWallPost);
 		createPostUrl.addParameter(paramOwnerID, valueUserId);
 		createPostUrl.addParameter(paramMessage, message);
-		//createPostUrl.addParameter("attachments", "photo260893278_437261158");
 		createPostUrl.addParameter(paramToken, valueToken);
 		createPostUrl.addParameter(paramVersion, valueVersion);
 		try {
-			post_id = getParam(post(createPostUrl.build().toURL()), paramPost_id);
+			post_id = getParam(get(createPostUrl.build().toURL()), paramPost_id);
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -137,7 +138,7 @@ public class VkApi {
 		editPostUrl.addParameter(paramToken, valueToken);
 		editPostUrl.addParameter(paramVersion, valueVersion);
 		try {
-			post(editPostUrl.build().toURL());
+			get(editPostUrl.build().toURL());
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -154,7 +155,7 @@ public class VkApi {
 		createCommentUrl.addParameter(paramToken, valueToken);
 		createCommentUrl.addParameter(paramVersion, valueVersion);
 		try {
-			post(createCommentUrl.build().toURL());
+			get(createCommentUrl.build().toURL());
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -170,39 +171,39 @@ public class VkApi {
 		deletePostUrl.addParameter(paramToken, valueToken);
 		deletePostUrl.addParameter(paramVersion, valueVersion);
 		try {
-			post(deletePostUrl.build().toURL());
+			get(deletePostUrl.build().toURL());
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void sendMessege(String messege) {
+	public void sendMessage(String message) {
 		sendMessegeUrl = new URIBuilder();
 		sendMessegeUrl.setScheme(scheme);
 		sendMessegeUrl.setHost(hostName);
-		sendMessegeUrl.setPath(methodSendMessege);
+		sendMessegeUrl.setPath(methodSendMessage);
 		sendMessegeUrl.addParameter(paramOwnerID, valueUserId);
 		sendMessegeUrl.addParameter(paramPeerId, valueUserId);
-		sendMessegeUrl.addParameter(paramMessage, messege);
+		sendMessegeUrl.addParameter(paramMessage, message);
 		sendMessegeUrl.addParameter(paramToken, valueToken);
 		sendMessegeUrl.addParameter(paramVersion, valueVersion);
 		try {
-			messege_id = post(sendMessegeUrl.build().toURL()).get(response).toString();
+			message_id = get(sendMessegeUrl.build().toURL()).get(response).toString();
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void deleteMessege(String messegeId) {
+	public void deleteMessage(String messageId) {
 		deleteMessegeUrl = new URIBuilder();
 		deleteMessegeUrl.setScheme(scheme);
 		deleteMessegeUrl.setHost(hostName);
-		deleteMessegeUrl.setPath(methodDeleteMessege);
-		deleteMessegeUrl.addParameter(paramMessageIds, messegeId);
+		deleteMessegeUrl.setPath(methodDeleteMessage);
+		deleteMessegeUrl.addParameter(paramMessageIds, messageId);
 		deleteMessegeUrl.addParameter(paramToken, valueToken);
 		deleteMessegeUrl.addParameter(paramVersion, valueVersion);
 		try {
-			post(deleteMessegeUrl.build().toURL());
+			get(deleteMessegeUrl.build().toURL());
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -215,19 +216,6 @@ public class VkApi {
 		HttpResponse response = null;
 		try {
 			response = httpClient.execute(httpGet);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return getResponseInfo(response);
-	}
-
-	private JSONObject post(URL url) {
-		CloseableHttpClient httpClient = HttpClientBuilder.create()
-				.setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build()).build();
-		HttpPost httpPost = new HttpPost(url.toString());
-		HttpResponse response = null;
-		try {
-			response = httpClient.execute(httpPost);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

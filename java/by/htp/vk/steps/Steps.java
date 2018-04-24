@@ -7,14 +7,14 @@ import org.openqa.selenium.WebDriver;
 import by.htp.vk.api.VkApi;
 import by.htp.vk.driver.DriverSingleton;
 import by.htp.vk.pages.LoginPage;
-import by.htp.vk.pages.MessegesPage;
+import by.htp.vk.pages.MessagesPage;
 import by.htp.vk.pages.NewsPage;
 import by.htp.vk.pages.UserPage;
 
 public class Steps {
 
-	private String message = "test messege";
-	private String editMessage = "edit test messege";
+	private String message = "test message";
+	private String editMessage = "edit test message";
 	private String comment = "test comment";
 	private String one = "1";
 
@@ -46,7 +46,7 @@ public class Steps {
 		page.goToMyPage();
 	}
 
-	public void goToMesseges() {
+	public void goToMessages() {
 		NewsPage page = new NewsPage(driver);
 		page.goToMesseges();
 	}
@@ -95,14 +95,14 @@ public class Steps {
 	}
 
 	public boolean sendUserMessage() {
-		api.sendMessege(message);
-		MessegesPage mPage = new MessegesPage(driver, api.getMessege_id());
+		api.sendMessage(message);
+		MessagesPage mPage = new MessagesPage(driver, api.getMessage_id());
 		logger.info("Message was sent");
 		return mPage.getMessageText().equals(message);
 	}
 
 	public void deleteUserMessage() {
-		api.deleteMessege(api.getMessege_id());
+		api.deleteMessage(api.getMessage_id());
 		logger.info("Message was deleted");
 	}
 }

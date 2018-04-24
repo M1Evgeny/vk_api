@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class MessgeSendTest {
+public class MessageSendTest {
 	private String messageCountBefore;
 	private String messageCountAfer;
 	private Steps steps;
@@ -20,11 +20,11 @@ public class MessgeSendTest {
 	}
 
 	@Test
-	public void testMessege() {
+	public void testMessage() {
 		steps.loginToVk();
-		steps.goToMesseges();
+		steps.goToMessages();
 		messageCountBefore = steps.getMessageCount();
-		Assert.assertTrue(steps.sendUserMessage(), "Message wasnt sent");
+		Assert.assertTrue(steps.sendUserMessage(), "Message wasn't sent");
 		steps.deleteUserMessage();
 		messageCountAfer = steps.getMessageCount();
 		Assert.assertEquals(messageCountBefore, messageCountAfer);
