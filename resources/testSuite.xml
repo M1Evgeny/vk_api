@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="vk api test">
+	<test name="CommentWallPostTest">
+		<classes>
+			<class name="by.htp.vk.tests.CommentWallPostTest" />
+		</classes>
+	</test>
+	<test name="CreateWallPostTest">
+		<classes>
+			<class name="by.htp.vk.tests.CreateWallPostTest" />
+		</classes>
+	</test>
+	<test name="DeleteWallPostTest">
+		<classes>
+			<class name="by.htp.vk.tests.DeleteWallPostTest" />
+		</classes>
+	</test>
+	<test name="EditWallPostTest">
+		<classes>
+			<class name="by.htp.vk.tests.EditWallPostTest" />
+		</classes>
+	</test>
+	<test name="LikeWallPostTest">
+		<classes>
+			<class name="by.htp.vk.tests.LikeWallPostTest" />
+		</classes>
+	</test>
+	<test name="MessageSendTest">
+		<classes>
+			<class name="by.htp.vk.tests.MessageSendTest" />
+		</classes>
+	</test>
+
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+		<listener class-name="by.htp.vk.listener.ScreenshotlListener"/>
+	</listeners>
+</suite>

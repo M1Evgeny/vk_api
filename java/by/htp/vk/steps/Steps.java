@@ -21,7 +21,7 @@ public class Steps {
 	private WebDriver driver;
 	private VkApi api;
 
-	private static final Logger logger = LogManager.getRootLogger();
+	private static final Logger logger = LogManager.getLogger();
 
 	public void initDriver() {
 		driver = DriverSingleton.getDriver();
