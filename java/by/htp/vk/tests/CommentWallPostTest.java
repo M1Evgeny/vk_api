@@ -2,15 +2,13 @@ package by.htp.vk.tests;
 
 import by.htp.vk.steps.Steps;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class CommentWallPostTest {
 	private Steps steps;
 
-	@BeforeClass
-	public void beforeClass() {
+	@BeforeMethod
+	public void setUp() {
 		steps = new Steps();
 		steps.initDriver();
 		steps.loginToVk();
@@ -23,8 +21,8 @@ public class CommentWallPostTest {
 		Assert.assertTrue(steps.addComment(), "Comment wasn't created");
 	}
 
-	@AfterClass
-	public void afterClass() {
+	@AfterMethod
+	public void tearDown() {
 		steps.deleteWallPost();
 		steps.closeDriver();
 	}

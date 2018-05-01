@@ -1,19 +1,20 @@
 package by.htp.vk.tests;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import by.htp.vk.steps.Steps;
 
-import org.testng.annotations.BeforeClass;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
+
 
 public class MessageSendTest {
 	private String messageCountBefore;
 	private String messageCountAfer;
 	private Steps steps;
 
-	@BeforeClass
+	@BeforeMethod
 	public void beforeClass() {
 		steps = new Steps();
 		steps.initDriver();
@@ -30,7 +31,7 @@ public class MessageSendTest {
 		Assert.assertEquals(messageCountBefore, messageCountAfer);
 	}
 
-	@AfterClass
+	@AfterMethod
 	public void afterClass() {
 		steps.closeDriver();
 	}

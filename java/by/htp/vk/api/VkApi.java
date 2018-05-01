@@ -22,10 +22,10 @@ import org.json.simple.parser.ParseException;
 
 public class VkApi {
 
-	private String post_count;
-	private String post_id;
-	private String message_count;
-	private String message_id;
+	private String postCount;
+	private String postId;
+	private String messageCount;
+	private String messageId;
 
 	private String valueUserId = getProperty("vk.userId");
 	private String hostName = getProperty("vk.hostName");
@@ -65,20 +65,20 @@ public class VkApi {
 	private URIBuilder sendMessegeUrl;
 	private URIBuilder deleteMessegeUrl;
 
-	public String getPost_count() {
-		return post_count;
+	public String getPostCount() {
+		return postCount;
 	}
 
-	public String getPost_id() {
-		return post_id;
+	public String getPostId() {
+		return postId;
 	}
 
-	public String getMessage_count() {
-		return message_count;
+	public String getMessagesCount() {
+		return messageCount;
 	}
 
-	public String getMessage_id() {
-		return message_id;
+	public String getMessageId() {
+		return messageId;
 	}
 
 	public void getWallPostCount() {
@@ -91,7 +91,7 @@ public class VkApi {
 		getWallPostCountUrl.addParameter(paramToken, valueToken);
 		getWallPostCountUrl.addParameter(paramVersion, valueVersion);
 		try {
-			post_count = getParam(get(getWallPostCountUrl.build().toURL()), count);
+			postCount = getParam(get(getWallPostCountUrl.build().toURL()), count);
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -105,7 +105,7 @@ public class VkApi {
 		getMessageCountUrl.addParameter(paramToken, valueToken);
 		getMessageCountUrl.addParameter(paramVersion, valueVersion);
 		try {
-			message_count = getParam(get(getMessageCountUrl.build().toURL()), count);
+			messageCount = getParam(get(getMessageCountUrl.build().toURL()), count);
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -121,7 +121,7 @@ public class VkApi {
 		createPostUrl.addParameter(paramToken, valueToken);
 		createPostUrl.addParameter(paramVersion, valueVersion);
 		try {
-			post_id = getParam(get(createPostUrl.build().toURL()), paramPost_id);
+			postId = getParam(get(createPostUrl.build().toURL()), paramPost_id);
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -188,7 +188,7 @@ public class VkApi {
 		sendMessegeUrl.addParameter(paramToken, valueToken);
 		sendMessegeUrl.addParameter(paramVersion, valueVersion);
 		try {
-			message_id = get(sendMessegeUrl.build().toURL()).get(response).toString();
+			messageId = get(sendMessegeUrl.build().toURL()).get(response).toString();
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}

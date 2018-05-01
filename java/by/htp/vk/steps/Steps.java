@@ -53,56 +53,56 @@ public class Steps {
 
 	public String getWallPostCount() {
 		api.getWallPostCount();
-		return api.getPost_count();
+		return api.getPostCount();
 	}
 
 	public String getMessageCount() {
 		api.getMessageCount();
-		return api.getMessage_count();
+		return api.getMessagesCount();
 	}
 
 	public boolean wallPost() {
 		api.createPost(message);
-		UserPage page = new UserPage(driver, api.getPost_id());
+		UserPage page = new UserPage(driver, api.getPostId());
 		logger.info("Wall post was created");
 		return page.cheackText(message);
 	}
 
 	public boolean edidWallPost() {
-		api.editPost(api.getPost_id(), editMessage);
-		UserPage page = new UserPage(driver, api.getPost_id());
+		api.editPost(api.getPostId(), editMessage);
+		UserPage page = new UserPage(driver, api.getPostId());
 		logger.info("Wall post was edited");
 		return page.cheackText(editMessage);
 	}
 
 	public boolean clickLikePost() {
-		UserPage page = new UserPage(driver, api.getPost_id());
+		UserPage page = new UserPage(driver, api.getPostId());
 		page.likePost();
 		logger.info("Wall post was liked");
 		return page.getlikeCount().getText().equals(one);
 	}
 
 	public boolean addComment() {
-		api.createComment(api.getPost_id(), comment);
+		api.createComment(api.getPostId(), comment);
 		logger.info("Comment was created to the wall post");
-		UserPage page = new UserPage(driver, api.getPost_id());
+		UserPage page = new UserPage(driver, api.getPostId());
 		return page.cheackCommentText(comment);
 	}
 
 	public void deleteWallPost() {
-		api.deletePost(api.getPost_id());
+		api.deletePost(api.getPostId());
 		logger.info("Wall post was deleted");
 	}
 
 	public boolean sendUserMessage() {
 		api.sendMessage(message);
-		MessagesPage mPage = new MessagesPage(driver, api.getMessage_id());
+		MessagesPage mPage = new MessagesPage(driver, api.getMessageId());
 		logger.info("Message was sent");
 		return mPage.getMessageText().equals(message);
 	}
 
 	public void deleteUserMessage() {
-		api.deleteMessage(api.getMessage_id());
+		api.deleteMessage(api.getMessageId());
 		logger.info("Message was deleted");
 	}
 }
