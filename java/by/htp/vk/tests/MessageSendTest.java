@@ -15,7 +15,7 @@ public class MessageSendTest {
 	private Steps steps;
 
 	@BeforeMethod
-	public void beforeClass() {
+	public void setUp() {
 		steps = new Steps();
 		steps.initDriver();
 	}
@@ -32,7 +32,7 @@ public class MessageSendTest {
 	}
 
 	@AfterMethod
-	public void afterClass() {
+	public void tearDown() {
 		steps.closeDriver();
 	}
 

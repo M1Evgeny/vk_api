@@ -10,7 +10,7 @@ public class LikeWallPostTest {
 	private Steps steps;
 
 	@BeforeMethod
-	public void beforeClass() {
+	public void setUp() {
 		steps = new Steps();
 		steps.initDriver();
 		steps.loginToVk();
@@ -24,7 +24,7 @@ public class LikeWallPostTest {
 	}
 
 	@AfterMethod
-	public void afterClass() {
+	public void tearDown() {
 		steps.deleteWallPost();
 		steps.closeDriver();
 	}

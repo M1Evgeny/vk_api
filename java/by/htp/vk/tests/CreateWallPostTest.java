@@ -10,7 +10,7 @@ public class CreateWallPostTest {
 	private Steps steps;
 
 	@BeforeMethod
-	public void beforeClass() {
+	public void setUp() {
 		steps = new Steps();
 		steps.initDriver();
 	}
@@ -23,7 +23,7 @@ public class CreateWallPostTest {
 	}
 
 	@AfterMethod
-	public void afterClass() {
+	public void tearDown() {
 		steps.deleteWallPost();
 		steps.closeDriver();
 	}

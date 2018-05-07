@@ -12,7 +12,7 @@ public class DeleteWallPostTest {
 	private String wallPostCountAfer;
 
 	@BeforeMethod
-	public void beforeClass() {
+	public void setUp() {
 		steps = new Steps();
 		steps.initDriver();
 		steps.loginToVk();
@@ -29,7 +29,7 @@ public class DeleteWallPostTest {
 	}
 
 	@AfterMethod
-	public void afterClass() {
+	public void tearDown() {
 		steps.closeDriver();
 	}
 
