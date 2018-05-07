@@ -20,7 +20,7 @@ public abstract class AbstractPage {
 	public abstract void openPage();
 
 	public WebElement getElement(By by) {
-		return wait.until(ExpectedConditions.elementToBeClickable(by));
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 	}
 
 }

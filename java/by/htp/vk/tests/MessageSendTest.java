@@ -28,7 +28,7 @@ public class MessageSendTest {
 		Assert.assertTrue(steps.sendUserMessage(), "Message wasn't sent");
 		steps.deleteUserMessage();
 		messageCountAfer = steps.getMessageCount();
-		Assert.assertEquals(messageCountBefore, messageCountAfer);
+		Assert.assertEquals(messageCountBefore, messageCountAfer, "Message wasn't deleted");
 	}
 
 	@AfterMethod
